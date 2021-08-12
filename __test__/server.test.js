@@ -4,7 +4,10 @@ const server = require('../src/server');
 const supertest = require('supertest');
 const request = supertest(server.app);
 
- 
+let obj = {
+    id:1,
+    foodtype :"hi fowod"
+}
 describe('my Server', ()=> {
 
     beforeEach(()=> {
@@ -26,7 +29,9 @@ describe('my Server', ()=> {
    
     
     it('Create a record using POST', async () => {
-        const response = await request.post('/food');
+        
+
+        const response = await request.post('/food').send(obj);
         expect(response.status).toEqual(200);
     });
 
@@ -41,15 +46,11 @@ describe('my Server', ()=> {
         expect(response.status).toEqual(200);
     });
 
-    // it('Update a record using PUT', async () => {
+    it('Update a record using PUT', async () => {
 
-    //     let obj = {
-    //         foodtype :"hi fowod"
-    //     }
-       
-    //     const response = await request.put('/food/1').send(obj);
-    //     expect(response.status).toEqual(200);
-    // });
+        const response = await request.put('/food/1').send(obj);
+        expect(response.status).toEqual(200);
+    });
 
 
     it('Destroy a record using DELETE', async () => {
