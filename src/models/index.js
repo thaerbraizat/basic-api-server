@@ -2,7 +2,8 @@
 'use strict';
 
 // connects to our database depending on the URI set as an environment variable, 
-const POSTGRES_URI ="postgres://localhost:5432/thaerbraizat";
+const POSTGRES_URI = process.env.NODEENV =="test" ? 'sqlite:memory ':  "postgres://localhost:5432/thaerbraizat";
+
 const { Sequelize, DataTypes } = require('sequelize');
 
 // We can add Configuration based on the environment ... Where is our code running in "development" and "test" vs "deployed"?
